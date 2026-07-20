@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menu_items",
+  "info": { "singularName": "menu-item", "pluralName": "menu-items", "displayName": "MenuItem", "description": "Navigation menu items" },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": { "content-manager": { "visible": true }, "content-type-builder": { "visible": true } },
+  "attributes": {
+    "label": { "type": "string", "required": true },
+    "url": { "type": "string", "required": true },
+    "order": { "type": "integer", "default": 0 }
+  }
+}

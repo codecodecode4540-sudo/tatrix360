@@ -1,0 +1,20 @@
+{
+  "name": "tatrix360-backend",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Strapi CMS backend for Tatrix360",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^5.0.0",
+    "@strapi/provider-upload-cloudinary": "^5.0.0",
+    "better-sqlite3": "^11.3.0"
+  },
+  "engines": { "node": ">=18.0.0 <=20.x.x", "npm": ">=6.0.0" },
+  "license": "MIT"
+}
