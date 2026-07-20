@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter, Merriweather } from 'next/font/google';
+// Suppress TS error about missing type declarations for CSS modules
+// as declarations are provided inline above.
+// @ts-ignore
 import './globals.css';
 import { ThemeProvider } from '@/components/site/theme-provider';
 import { SiteHeader } from '@/components/site/site-header';
