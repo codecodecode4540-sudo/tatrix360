@@ -2,6 +2,9 @@ import type { Post, Category, Author, Tag, MenuItem } from '@/lib/types';
 import { demoPosts, demoCategories, demoAuthors, demoTags, demoMenu } from '@/lib/demo-data';
 
 const STRAPI_URL = process.env.STRAPI_URL || process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://tatrix360.vercel.app";
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN || '';
 
 let strapiAvailable: boolean | null = null;
