@@ -8,26 +8,10 @@ import { getMenu } from '@/lib/strapi';
 
 const inter = localFont({
   src: [
-    {
-      path: './fonts/Inter-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Inter-Medium.woff2',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Inter-SemiBold.woff2',
-      weight: '600',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Inter-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
+    { path: './fonts/Inter-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/Inter-Medium.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/Inter-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/Inter-Bold.woff2', weight: '700', style: 'normal' },
   ],
   variable: '--font-inter',
   display: 'swap',
@@ -35,16 +19,8 @@ const inter = localFont({
 
 const merriweather = localFont({
   src: [
-    {
-      path: './fonts/Merriweather-Regular.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: './fonts/Merriweather-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
+    { path: './fonts/Merriweather-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/Merriweather-Bold.woff2', weight: '700', style: 'normal' },
   ],
   variable: '--font-merriweather',
   display: 'swap',
@@ -69,11 +45,7 @@ export default async function RootLayout({
   const menu = await getMenu();
 
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${inter.variable} ${merriweather.variable}`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${merriweather.variable}`}>
       <body className="flex min-h-screen flex-col font-sans">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <SiteHeader menu={menu} />
