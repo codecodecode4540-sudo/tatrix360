@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { getPosts, getCategories, getMenu } from '@/lib/strapi';
+import { getPosts, getCategories } from '@/lib/strapi';
 import { PostCard } from '@/components/site/post-card';
 
 export const revalidate = 60;
@@ -12,26 +13,45 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }) {
   const categories = await getCategories();
   const cat = categories.find((c) => c.slug === params.slug);
-  return { title: cat?.name, description: cat?.description };
+
+  return {
+    title: cat?.name,
+    description: cat?.description,
+  };
 }
 
-export default async function CategoryPage({ params }: { params: { slug: string } }) {
+export default async function CategoryPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const [posts, categories] = await Promise.all([
     getPosts({ categorySlug: params.slug, pageSize: 20 }),
     getCategories(),
   ]);
+
   const category = categories.find((c) => c.slug === params.slug);
+
   if (!category) notFound();
 
   return (
     <div className="container-page py-8">
       <header className="mb-8">
-        <h1 className="font-serif text-3xl font-bold sm:text-4xl">{category.name}</h1>
-        {category.description && <p className="mt-2 text-lg text-muted-foreground">{category.description}</p>}
+        <h1 className="font-serif text-3xl font-bold sm:text-4xl">
+          {category.name}
+        </h1>
+        {category.description && (
+          <p className="mt-2 text-lg text-muted-foreground">
+            {category.description}
+          </p>
+        )}
       </header>
+
       {posts.length ? (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => <PostCard key={post.id} post={post} />)}
+          {posts.map((post) => (
+            <PostCard key={post.id} post={post} />
+          ))}
         </div>
       ) : (
         <p className="text-muted-foreground">No articles in this category yet.</p>
