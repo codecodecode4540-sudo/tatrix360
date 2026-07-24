@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-// @ts-ignore: allow importing global CSS without type declarations
 import './globals.css';
 import { ThemeProvider } from '@/components/site/theme-provider';
 import { SiteHeader } from '@/components/site/site-header';
