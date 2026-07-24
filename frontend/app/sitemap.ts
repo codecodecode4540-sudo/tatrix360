@@ -24,9 +24,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const postEntries: MetadataRoute.Sitemap = posts.data.map((p) => ({
-    url: `${SITE_URL}/${p.category.slug}/${p.slug}`,
-    lastModified: new Date(p.publishedAt),
+  const postEntries: MetadataRoute.Sitemap = posts
+  .filter((p) => p.category && p.publishedAt)
+  .map((p) => ({
+    url: `${SITE_URL}/${p.category!.slug}/${p.slug}`,
+    lastModified: new Date(p.publishedAt!),
     changeFrequency: 'weekly',
     priority: 0.9,
   }));
