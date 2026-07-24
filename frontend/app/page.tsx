@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { getPosts, getTrendingPosts, getMenu, getCategories } from '@/lib/strapi';
 import { PostCard, CompactCard } from '@/components/site/post-card';
 import { NewsletterBox } from '@/components/site/newsletter-box';
@@ -21,18 +22,37 @@ export default async function HomePage() {
     <div className="flex flex-col gap-12 py-8">
       {hero && (
         <section>
-          <a href={`/${hero.category?.slug}/${hero.slug}`} className="group block overflow-hidden rounded-2xl">
+          <a
+            href={`/${hero.category?.slug}/${hero.slug}`}
+            className="group block overflow-hidden rounded-2xl"
+          >
             <div className="relative aspect-[21/9] w-full overflow-hidden rounded-2xl">
               {hero.heroImage ? (
-                <img src={hero.heroImage} alt={hero.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <Image
+                  src={hero.heroImage}
+                  alt={hero.title}
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               ) : (
                 <div className="h-full w-full bg-muted" />
               )}
             </div>
+
             <div className="mt-4 max-w-3xl">
-              {hero.category && <span className="text-sm font-semibold uppercase tracking-wider text-primary">{hero.category.name}</span>}
-              <h1 className="mt-2 font-serif text-3xl font-bold leading-tight group-hover:text-primary sm:text-4xl">{hero.title}</h1>
-              {hero.subtitle && <p className="mt-3 text-lg text-muted-foreground">{hero.subtitle}</p>}
+              {hero.category && (
+                <span className="text-sm font-semibold uppercase tracking-wider text-primary">
+                  {hero.category.name}
+                </span>
+              )}
+              <h1 className="mt-2 font-serif text-3xl font-bold leading-tight group-hover:text-primary sm:text-4xl">
+                {hero.title}
+              </h1>
+              {hero.subtitle && (
+                <p className="mt-3 text-lg text-muted-foreground">{hero.subtitle}</p>
+              )}
             </div>
           </a>
         </section>
@@ -42,7 +62,9 @@ export default async function HomePage() {
         <div className="lg:col-span-2">
           <h2 className="font-serif text-2xl font-bold">Latest</h2>
           <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {rest.map((post) => <PostCard key={post.id} post={post} />)}
+            {rest.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))}
           </div>
         </div>
 
@@ -50,9 +72,12 @@ export default async function HomePage() {
           <div>
             <h2 className="font-serif text-xl font-bold">Trending</h2>
             <div className="mt-2 divide-y divide-border border-b border-border">
-              {trending.map((post) => <CompactCard key={post.id} post={post} />)}
+              {trending.map((post) => (
+                <CompactCard key={post.id} post={post} />
+              ))}
             </div>
           </div>
+
           <AdSlot />
           <NewsletterBox variant="compact" />
         </aside>
