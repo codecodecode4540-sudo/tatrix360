@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getPosts, getCategories } from '@/lib/strapi';
 import { PostCard } from '@/components/site/post-card';
