@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Search as SearchIcon } from 'lucide-react';
+import { Search as SearchIcon, Loader2 } from 'lucide-react';
 import { PostCard } from '@/components/site/post-card';
 import type { Post } from '@/lib/types';
 
@@ -23,15 +23,29 @@ export default function SearchPage() {
   }, [query]);
 
   return (
-    <div className="container-page py-8">
-      <h1 className="font-serif text-3xl font-bold">Search</h1>
-      <div className="mt-4 flex items-center gap-2 rounded-xl border border-input bg-background px-4 py-3">
-        <SearchIcon className="h-5 w-5 text-muted-foreground" />
-        <input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search articles..." className="w-full bg-transparent text-lg outline-none placeholder:text-muted-foreground" />
+    <div className="container-page py-8 sm:py-12">
+      <p className="text-sm font-semibold uppercase tracking-wider text-primary">Search</p>
+      <h1 className="mt-2 font-serif text-4xl font-bold tracking-tight sm:text-5xl">Find a story</h1>
+
+      <div className="mt-6 flex items-center gap-3 rounded-2xl border border-input bg-card px-5 py-4 transition-colors focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
+        <SearchIcon className="h-5 w-5 flex-shrink-0 text-muted-foreground" />
+        <input
+          autoFocus
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search articles..."
+          className="w-full bg-transparent text-lg outline-none placeholder:text-muted-foreground"
+        />
+        {loading && <Loader2 className="h-5 w-5 flex-shrink-0 animate-spin text-muted-foreground" />}
       </div>
 
-      {loading && <p className="mt-6 text-muted-foreground">Searching...</p>}
-      {!loading && query && results.length === 0 && <p className="mt-6 text-muted-foreground">No results for &quot;{query}&quot;.</p>}
+      {!loading && query && results.length === 0 && (
+        <div className="mt-8 rounded-2xl border border-dashed border-border py-16 text-center">
+          <p className="text-lg font-medium text-muted-foreground">No results for &quot;{query}&quot;.</p>
+          <p className="mt-1 text-sm text-muted-foreground">Try a different search term.</p>
+        </div>
+      )}
+
       {results.length > 0 && (
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((post) => <PostCard key={post.id} post={post} />)}
